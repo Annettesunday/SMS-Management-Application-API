@@ -27,7 +27,7 @@ class Contact {
   getAContact(req, res) {
     const { contactId } = req.params;
     contactService
-      .get({ contactId })
+      .get(contactId )
       .then(response => {
         if (!response) {
           return res.status(404).send({ message: "Contact cannot be found" });
@@ -72,7 +72,17 @@ class Contact {
   }
 
   deleteContact(req, res) {
-    return res.status(200);
+    const { contactId } = req.params;
+    contactService.delete(contactId)
+    .then((response) => {
+      if (response){
+        return res.status(200).send({message: "Contact deleted successfully"})
+      }
+      res.status(404).send({message: "Contact does not exist"})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: "Error deleting contact"})
+    })
   }
 }
 export default Contact;

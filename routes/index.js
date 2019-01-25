@@ -16,7 +16,7 @@ Route.post("/contact", validation.contact, contact.createContact);
 Route.get("/contact/:contactId", contact.getAContact);
 Route.get("/contacts", contact.getAllContacts);
 // Route.put("/contact/:contactId", contact.updateContact);
-// Route.delete("/contact/:contactId", contact.deleteContact);
+Route.delete("/contact/:contactId", contact.deleteContact);
 
 // Route.post("/message/:senderId/:receiverId", message.createMessage);
 // Route.get("/message/:id", messagegetAMessage);

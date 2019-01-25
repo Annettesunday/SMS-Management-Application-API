@@ -17,8 +17,8 @@ edit(data) {
   return db.Contact.update({ where: data })
 }
 
-delete(data) {
-  return db.Contact.destroy({ where: data})
+delete(contactId) {
+  return db.Contact.destroy({ where: {id: contactId}})
 }
 getSentMessages(data) {
   return db.Contact.findAll({
