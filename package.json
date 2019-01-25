@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel --presets es2015 ./app.js",
     "dev": "nodemon --exec ./app.js",
-    "start": "babel-node ./app.js"
+    "start": "nodemon  ./app.js --exec babel-node"
   },
   "author": "Annette Sunday",
   "license": "ISC",
