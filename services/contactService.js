@@ -6,7 +6,7 @@ add(data) {
 }
 
 get(contactId) {
-  return db.Contact.findOne(contactId,{ where: contactId})
+  return db.Contact.findById(contactId,{ where: contactId})
 }
 
 getAll(data) {
