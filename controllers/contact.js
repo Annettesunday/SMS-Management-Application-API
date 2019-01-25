@@ -1,6 +1,27 @@
-class contactController {
+import ContactService  from "../services/contactService";
+
+const contactService = new ContactService();
+
+
+class Contact {
   createContact(req,res) {
-    return res.status(200)
+    const { name,phoneNumber } = req.body;
+    contactService.add({
+      name,
+      phoneNumber
+    })
+    .then((response) => {
+      if (response[1]) {
+        return res.status(201).send({message: "Contact created", response})
+      }
+      return res.status(409).send({message: "Contact already exists"})
+    })
+    .catch((error) => {
+      const errorMessage = error.errors.map(value => value.message);
+      return res.status(400).send({
+        error: errorMessage,
+      })
+    })
   }
 
   getAContact(req,res) {
@@ -27,4 +48,4 @@ class contactController {
   }
 
 }
-export default contactController;
+export default Contact;

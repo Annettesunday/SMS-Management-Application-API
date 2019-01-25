@@ -1,6 +1,6 @@
 import db from '../models/index';
 
-class contactService {
+class ContactService {
 add(data) {
   return db.Contact.findOrCreate({where: data})
 }
@@ -44,4 +44,4 @@ getSReceivedMessages(data) {
 
 }
 
-export default contactService;
+export default ContactService;

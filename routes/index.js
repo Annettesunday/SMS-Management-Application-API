@@ -1,28 +1,32 @@
-import Route from 'express';
-import contactController from "../controllers/contact";
+import express from "express";
+import Contact from "../controllers/contact";
 import messageController from "../controllers/message";
+import Validation from "../middleware/validation";
 
+const Route = express.Router();
+const contact = new Contact();
+const validation = new Validation();
 
-const Route = express.Route();
-
-Route.get("/", (res,req) => {
-  res.status(200).send({message: "Welcome to SMS Management API"})
+Route.get("/", (res, req) => {
+  res.status(200).send({ message: "Welcome to SMS Management API" });
 });
 
-Route.post("/contact", contactController.createContact);
-Route.get("/contact/:contactId", contactController.getAContact);
-Route.get("/contact", contactController.getAllContacts);
-Route.put("/contact/:contactId",contactController.updateContact);
-Route.delete("/contact/:contactId",contactController.deleteContact);
+Route.post("/contact", validation.contact, contact.createContact);
 
+// Route.get("/contact/:contactId", contact.getAContact);
+// Route.get("/contact", contact.getAllContacts);
+// Route.put("/contact/:contactId", contact.updateContact);
+// Route.delete("/contact/:contactId", contact.deleteContact);
 
-Route.post("/message/:senderId/:receiverId", messageController.createMessage);
-Route.get("/message/:id", messageController.getAMessage);
-Route.get("/message", messageController.getAllMessages);
-Route.get("/message/sent/:senderId", messageController.getAllSentMessages);
-Route.get("/message/received:receiverId", messageController.getAllReceivedMessages);
-Route.put("/message/:id",messageController.updateMessage);
-Route.delete("/message/:messageId",messageController.deleteMessage);
-
+// Route.post("/message/:senderId/:receiverId", message.createMessage);
+// Route.get("/message/:id", messagegetAMessage);
+// Route.get("/message", message.getAllMessages);
+// Route.get("/message/sent/:senderId", message.getAllSentMessages);
+// Route.get(
+//   "/message/received:receiverId",
+//   message.getAllReceivedMessages
+// );
+// Route.put("/message/:id", message.updateMessage);
+// Route.delete("/message/:messageId", message.deleteMessage);
 
 export default Route;

@@ -1,6 +1,6 @@
 import db from "../models/message";
 
-class messageService {
+class MessageService {
 add(data) {
   return db.Message.findOrCreate({where: data})
 }
@@ -16,4 +16,4 @@ delete(data) {
 }
 }
 
-export default messageService;
+export default MessageService;
