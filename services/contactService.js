@@ -5,8 +5,8 @@ add(data) {
   return db.Contact.findOrCreate({where: data})
 }
 
-get(data) {
-  return db.Contact.findOne({ where: data})
+get(contactId) {
+  return db.Contact.findOne(contactId,{ where: contactId})
 }
 
 getAll(data) {

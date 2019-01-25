@@ -25,7 +25,19 @@ class Contact {
   }
 
   getAContact(req,res) {
-    return res.status(200)
+    const { contactId } = req.params;
+    contactService.get({contactId})
+    .then((response) => {
+      if(!response) {
+        return res.status(404).send({message: "Contact cannot be found"})
+      }
+      return res.status(200).send({message: "Contact retrieved successfully", response})
+    })
+    .catch((error) => {
+      return res.status(400).send({
+        error: "error getting contact",
+      })
+    })
   }
 
   getAllContact(req,res) {

@@ -13,7 +13,7 @@ Route.get("/", (res, req) => {
 
 Route.post("/contact", validation.contact, contact.createContact);
 
-// Route.get("/contact/:contactId", contact.getAContact);
+Route.get("/contact/:contactId", contact.getAContact);
 // Route.get("/contact", contact.getAllContacts);
 // Route.put("/contact/:contactId", contact.updateContact);
 // Route.delete("/contact/:contactId", contact.deleteContact);
