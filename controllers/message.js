@@ -1,7 +1,20 @@
-class messageController
+import MessageService from "../services/messageService";
+
+const messageService = new MessageService();
+
+
+class Message
 {
   createMessage(req,res) {
-    res.status(200);
+    const {sender, receiver, senderId, receiverId, message } = req.body;
+    messageService.add({sender, receiver,senderId, receiverId,message,  status:'sent'})
+    .then((response ) => {
+        return res.status(201).send({message: "Message has been successfully sent"})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: "Error sending message"})
+    })
+
   }
 
   getAMessage(req,res) {
@@ -21,4 +34,4 @@ class messageController
   }
 
 }
-export default messageController;
+export default Message;

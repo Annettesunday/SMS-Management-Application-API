@@ -1,12 +1,12 @@
-import db from "../models/message";
+import db from "../models/index";
 
 class MessageService {
 add(data) {
-  return db.Message.findOrCreate({where: data})
+  return db.Message.create(data)
 }
 
-get(data) {
-  return db.Message.find(data)
+get(id) {
+  return db.Message.findById(id,{where: {id: id}})
 }
 getAll(data) {
   return db.Message.findAll({where: data})

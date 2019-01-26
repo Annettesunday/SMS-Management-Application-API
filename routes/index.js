@@ -1,11 +1,14 @@
 import express from "express";
 import Contact from "../controllers/contact";
-import messageController from "../controllers/message";
+import Message from "../controllers/message";
 import Validation from "../middleware/validation";
+import checkSender from "../middleware/checkSender";
+import checkReceiver from "../middleware/checkReceiver";
 
 const Route = express.Router();
 const contact = new Contact();
 const validation = new Validation();
+const message = new Message();
 
 Route.get("/", (res, req) => {
   res.status(200).send({ message: "Welcome to SMS Management API" });
@@ -18,7 +21,7 @@ Route.get("/contacts", contact.getAllContacts);
 Route.put("/contact/:contactId", validation.contact, contact.updateContact);
 Route.delete("/contact/:contactId", contact.deleteContact);
 
-// Route.post("/message/:senderId/:receiverId", message.createMessage);
+Route.post("/message", checkSender, checkReceiver,message.createMessage);
 // Route.get("/message/:id", messagegetAMessage);
 // Route.get("/message", message.getAllMessages);
 // Route.get("/message/sent/:senderId", message.getAllSentMessages);
