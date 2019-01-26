@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
-    sender: {
-      type: DataTypes.STRING,
+    senderId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: {
@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    receiver: {
-      type: DataTypes.STRING,
+    receiverId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: {

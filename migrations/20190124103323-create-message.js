@@ -8,24 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sender: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            args: true,
-            msg: 'sender cannot be empty'
-          },
+      senderId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Contacts',
+          key: 'id',
+          as: 'sentMessages',
         },
       },
-      receiver: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            args: true,
-            msg: 'Receiver cannot be empty'
-          },
+      receiverId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Contacts',
+          key: 'id',
+          as: 'receivedMessages',
         },
       },
       message: {
