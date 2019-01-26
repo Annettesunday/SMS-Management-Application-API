@@ -11,8 +11,8 @@ get(id) {
 getAll(data) {
   return db.Message.findAll({where: data})
 }
-delete(data) {
-  return db.Message.destroy({where: data})
+delete(messageId) {
+  return db.Message.destroy({where: {id: messageId}})
 }
 }
 

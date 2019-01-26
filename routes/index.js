@@ -30,6 +30,6 @@ Route.get("/messages", message.getAllMessages);
 //   message.getAllReceivedMessages
 // );
 // Route.put("/message/:id", message.updateMessage);
-// Route.delete("/message/:messageId", message.deleteMessage);
+Route.delete("/message/:messageId", message.deleteMessage);
 
 export default Route;

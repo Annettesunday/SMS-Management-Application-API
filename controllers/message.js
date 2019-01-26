@@ -39,7 +39,19 @@ class Message
   }
 
   deleteMessage(req,res) {
-    res.status(200);
+    const { messageId } = req.params;
+    messageService.delete(messageId)
+    .then((response) => {
+      console.log("response is", response)
+      if(response === 0){
+        // console.log("MY MESSAGE", response.message)
+        return res.status(404).send({message: "Message not found"})
+      }
+      return res.status(200).send({message: "Message successfully deleted"})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: error})
+    })
   }
 
 }
