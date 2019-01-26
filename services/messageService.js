@@ -6,7 +6,7 @@ add(data) {
 }
 
 get(id) {
-  return db.Message.findById(id,{where: {id: id}})
+  return db.Message.findById(id, { where: id})
 }
 getAll(data) {
   return db.Message.findAll({where: data})

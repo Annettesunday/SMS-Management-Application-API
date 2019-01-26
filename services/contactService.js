@@ -5,8 +5,8 @@ class ContactService {
     return db.Contact.findOrCreate({ where: data });
   }
 
-  get(contactId) {
-    return db.Contact.findById(contactId, { where: contactId });
+  get(id) {
+    return db.Contact.findById(id, { where: id });
   }
   findOne(data) {
     return db.Contact.findOne({where: data})
@@ -16,8 +16,8 @@ class ContactService {
     return db.Contact.findAll({ where: data });
   }
 
-  edit(contactId, data) {
-    return db.Contact.update(data, { where: { id: contactId } });
+  edit(id, data) {
+    return db.Contact.update(data, { where: { id: id } });
   }
 
   delete(contactId) {
