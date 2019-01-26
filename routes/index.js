@@ -25,10 +25,7 @@ Route.post("/message", checkSender, checkReceiver,message.createMessage);
 Route.get("/message/:id", message.getAMessage);
 Route.get("/messages", message.getAllMessages);
 Route.get("/message/sentMessages/:phoneNumber", contact.getAllSentMessages);
-// Route.get(
-//   "/message/received:receiverId",
-//   message.getAllReceivedMessages
-// );
+Route.get("/message/receivedMessages/:phoneNumber",contact.getAllReceivedMessages);
 Route.delete("/message/:messageId", message.deleteMessage);
 
 export default Route;

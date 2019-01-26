@@ -66,12 +66,25 @@ class Contact {
       if (response === 0) {
         return res.status(404).send({message: "Sent messages not available"})
       }
-      return res.status(200).send({response: response.sentMessages})
+      return res.status(200).send({response})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: error})
     })
   }
 
   getAllReceivedMessages(req, res) {
-    res.status(200);
+    const { phoneNumber } = req.params;
+    contactService.getReceivedMessages(phoneNumber)
+    .then((response) => {
+      if (response === 0) {
+        return res.status(404).send({message: "Received messages not available"})
+      }
+      return res.status(200).send({response})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: error})
+    })
   }
 
   updateContact(req, res) {
