@@ -60,7 +60,14 @@ class Contact {
       });
   }
   getAllSentMessages(req, res) {
-    res.status(200);
+    const {phoneNumber} = req.params;
+    contactService.getSentMessages(phoneNumber)
+    .then((response) => {
+      if (response === 0) {
+        return res.status(404).send({message: "Sent messages not available"})
+      }
+      return res.status(200).send({response: response.sentMessages})
+    })
   }
 
   getAllReceivedMessages(req, res) {

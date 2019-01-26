@@ -24,12 +24,11 @@ Route.delete("/contact/:contactId", contact.deleteContact);
 Route.post("/message", checkSender, checkReceiver,message.createMessage);
 Route.get("/message/:id", message.getAMessage);
 Route.get("/messages", message.getAllMessages);
-// Route.get("/message/sent/:senderId", message.getAllSentMessages);
+Route.get("/message/sentMessages/:phoneNumber", contact.getAllSentMessages);
 // Route.get(
 //   "/message/received:receiverId",
 //   message.getAllReceivedMessages
 // );
-// Route.put("/message/:id", message.updateMessage);
 Route.delete("/message/:messageId", message.deleteMessage);
 
 export default Route;
