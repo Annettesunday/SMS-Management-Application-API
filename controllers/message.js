@@ -18,15 +18,24 @@ class Message
   }
 
   getAMessage(req,res) {
-    res.status(200);
+    const { id } = req.params;
+    messageService.get(id)
+    .then((response) => {
+      return res.status(200).send({message: response.message})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: "Error getting Message"})
+    })
   }
 
-  getAllMessage(req,res) {
-    res.status(200);
-  }
-
-  updateMessage(req,res) {
-    res.status(200);
+  getAllMessages(req,res) {
+    messageService.getAll()
+    .then((response) => {
+      return res.status(200).send({message: "All messages retrieved successfully",response})
+    })
+    .catch((error) => {
+      return res.status(400).send({error: "Error getting all messages"})
+    })
   }
 
   deleteMessage(req,res) {
