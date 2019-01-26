@@ -8,6 +8,9 @@ class ContactService {
   get(contactId) {
     return db.Contact.findById(contactId, { where: contactId });
   }
+  findOne(data) {
+    return db.Contact.findOne({where: data})
+  }
 
   getAll(data) {
     return db.Contact.findAll({ where: data });
@@ -33,7 +36,7 @@ class ContactService {
     });
   }
 
-  getSReceivedMessages(data) {
+  getReceivedMessages(data) {
     return db.Contact.findAll({
       include: [
         {
