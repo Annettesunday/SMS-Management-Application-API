@@ -7,7 +7,8 @@
     "build": "babel --presets es2015 ./app.js",
     "dev": "nodemon --exec ./app.js",
     "start": "nodemon  ./app.js --exec babel-node",
-    "test": "export NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc mocha progress tests/*.spec.js --exit --compilers js:babel-core/register"
+    "test": "export NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc mocha progress tests/*.spec.js --exit --compilers js:babel-core/register",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "check-coverage": true,
@@ -22,12 +23,19 @@
   "dependencies": {
     "babel-core": "^6.26.3",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "dotenv": "^6.2.0",
     "eslint": "^5.12.1",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "morgan": "^1.9.1",
+    "nyc": "^13.1.0",
     "pg": "^7.8.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0",
+    "supertest": "^3.4.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",

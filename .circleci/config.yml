@@ -1,0 +1,38 @@
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/sms-management-application # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:dubnium # ...with this image as the primary container; this is where all `steps` will run
+      - image: postgres:11.1
+        environment:
+          POSTGRES_USER: sms_user
+          POSTGRES_DB: database_sms_test
+          POSTGRES_PASSWORD: sms_password
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-dependencies
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # run tests
+          name: test
+          command: |
+            export TEST_DB_NAME='database_sms_test'
+            export TEST_DB_USERNAME='sms_user'
+            export TEST_DB_PASSWORD='sms_password'
+            npm test
+      - run: # run coverage report
+          name: code-coverage
+          command: |
+            export COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}
+            npm run coverage
