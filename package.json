@@ -6,7 +6,16 @@
   "scripts": {
     "build": "babel --presets es2015 ./app.js",
     "dev": "nodemon --exec ./app.js",
-    "start": "nodemon  ./app.js --exec babel-node"
+    "start": "nodemon  ./app.js --exec babel-node",
+    "test": "export NODE_ENV=test && sequelize db:migrate:undo:all && sequelize db:migrate && nyc mocha progress tests/*.spec.js --exit --compilers js:babel-core/register"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "exclude": "**/*.spec.js",
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
   },
   "author": "Annette Sunday",
   "license": "ISC",
