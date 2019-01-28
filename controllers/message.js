@@ -12,7 +12,7 @@ class Message
         return res.status(201).send({message: "Message has been successfully sent"})
     })
     .catch((error) => {
-      return res.status(400).send({error: "Error sending message"})
+      return res.status(400).send({error: error.errors[0].message})
     })
 
   }
@@ -24,7 +24,7 @@ class Message
       return res.status(200).send({message: response.message})
     })
     .catch((error) => {
-      return res.status(400).send({error: "Error getting Message"})
+      return res.status(400).send({error: error.errors[0].message})
     })
   }
 
@@ -34,7 +34,7 @@ class Message
       return res.status(200).send({message: "All messages retrieved successfully",response})
     })
     .catch((error) => {
-      return res.status(400).send({error: "Error getting all messages"})
+      return res.status(400).send({error: error.errors[0].message})
     })
   }
 
@@ -42,15 +42,13 @@ class Message
     const { messageId } = req.params;
     messageService.delete(messageId)
     .then((response) => {
-      console.log("response is", response)
       if(response === 0){
-        // console.log("MY MESSAGE", response.message)
         return res.status(404).send({message: "Message not found"})
       }
       return res.status(200).send({message: "Message successfully deleted"})
     })
     .catch((error) => {
-      return res.status(400).send({error: error})
+      return res.status(400).send({error: error.errors[0].message})
     })
   }
 

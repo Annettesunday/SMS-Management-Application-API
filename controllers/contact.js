@@ -17,9 +17,8 @@ class Contact {
         return res.status(409).send({ message: "Contact already exists" });
       })
       .catch(error => {
-        const errorMessage = error.errors.map(value => value.message);
         return res.status(400).send({
-          error: errorMessage
+          error: error.errors[0].message
         });
       });
   }
@@ -38,7 +37,7 @@ class Contact {
       })
       .catch(error => {
         return res.status(400).send({
-          error: "error getting contact"
+          error: error.errors[0].message
         });
       });
   }
@@ -55,36 +54,42 @@ class Contact {
       })
       .catch(error => {
         res.status(400).send({
-          error: "Error retrieving contacts"
+          error: error.errors[0].message
         });
       });
   }
   getAllSentMessages(req, res) {
-    const {phoneNumber} = req.params;
-    contactService.getSentMessages(phoneNumber)
-    .then((response) => {
-      if (response === 0) {
-        return res.status(404).send({message: "Sent messages not available"})
-      }
-      return res.status(200).send({response})
-    })
-    .catch((error) => {
-      return res.status(400).send({error: error})
-    })
+    const { phoneNumber } = req.params;
+    contactService
+      .getSentMessages(phoneNumber)
+      .then(response => {
+        if (response === 0) {
+          return res
+            .status(404)
+            .send({ message: "Sent messages not available" });
+        }
+        return res.status(200).send({ response });
+      })
+      .catch(error => {
+        return res.status(400).send({ error: error.errors[0].message});
+      });
   }
 
   getAllReceivedMessages(req, res) {
     const { phoneNumber } = req.params;
-    contactService.getReceivedMessages(phoneNumber)
-    .then((response) => {
-      if (response === 0) {
-        return res.status(404).send({message: "Received messages not available"})
-      }
-      return res.status(200).send({response})
-    })
-    .catch((error) => {
-      return res.status(400).send({error: error})
-    })
+    contactService
+      .getReceivedMessages(phoneNumber)
+      .then(response => {
+        if (response === 0) {
+          return res
+            .status(404)
+            .send({ message: "Received messages not available" });
+        }
+        return res.status(200).send({ response });
+      })
+      .catch(error => {
+        return res.status(400).send({ error: error.errors[0].message });
+      });
   }
 
   updateContact(req, res) {
@@ -99,7 +104,7 @@ class Contact {
         res.status(200).send({ message: "Contact updated successfully" });
       })
       .catch(error => {
-        return res.status(400).send({ error: "Error updating contact"});
+        return res.status(400).send({ error: error.errors[0].message });
       });
   }
 
@@ -116,7 +121,7 @@ class Contact {
         res.status(404).send({ message: "Contact does not exist" });
       })
       .catch(error => {
-        return res.status(400).send({ error: "Error deleting contact" });
+        return res.status(400).send({ error: error.errors[0].message });
       });
   }
 }

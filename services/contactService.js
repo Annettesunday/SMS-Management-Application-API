@@ -1,15 +1,19 @@
 import db from "../models/index";
 
 class ContactService {
-  add(data) {
-    return db.Contact.findOrCreate({ where: data });
+  add({phoneNumber,name}) {
+    return db.Contact.findOrCreate(
+      {
+        where: {phoneNumber},defaults: {name}
+      }
+    )
   }
 
   get(id) {
     return db.Contact.findById(id, { where: id });
   }
   findOne(data) {
-    return db.Contact.findOne({where: data})
+    return db.Contact.findOne({ where: data });
   }
 
   getAll(data) {

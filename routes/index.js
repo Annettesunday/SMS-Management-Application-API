@@ -10,9 +10,6 @@ const contact = new Contact();
 const validation = new Validation();
 const message = new Message();
 
-Route.get("/", (res, req) => {
-  res.status(200).send({ message: "Welcome to SMS Management API" });
-});
 
 Route.post("/contact", validation.contact, contact.createContact);
 
