@@ -11,10 +11,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: {
-          args: true,
-          msg: 'This contact already exists'
-        },
         validate: {
           notEmpty: {
             args: true,
@@ -27,7 +23,7 @@ module.exports = {
         },
       },
       phoneNumber: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: {
           args: true,
@@ -37,15 +33,7 @@ module.exports = {
           notEmpty: {
             args: true,
             msg: 'Phone number cannot be empty'
-          },
-          isNumeric: {
-            args: true,
-            msg: 'Only numbers are allowed'
-          },
-          isInt: {
-            args: true,
-            msg: 'Only valid integers are allowed'
-          },
+          }
         },
       },
       createdAt: {
