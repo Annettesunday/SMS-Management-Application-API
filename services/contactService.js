@@ -10,14 +10,35 @@ class ContactService {
   }
 
   get(id) {
-    return db.Contact.findById(id, { where: id });
+    return db.Contact.findById(id,{
+      include: [
+        {
+          association: 'sentMessages',
+        },
+        {
+          association: 'receivedMessages',
+        },
+      ],
+      where: {
+        data: id
+      }
+    });
   }
   findOne(data) {
     return db.Contact.findOne({ where: data });
   }
 
-  getAll(data) {
-    return db.Contact.findAll({ where: data });
+  getAll() {
+    return db.Contact.findAll({
+      include: [
+        {
+          association: 'sentMessages',
+        },
+        {
+          association: 'receivedMessages',
+        },
+      ],
+     });
   }
 
   edit(id, data) {

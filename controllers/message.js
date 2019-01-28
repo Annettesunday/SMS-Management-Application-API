@@ -9,7 +9,7 @@ class Message
     const {sender, receiver, senderId, receiverId, message } = req.body;
     messageService.add({sender, receiver,senderId, receiverId,message,  status:'sent'})
     .then((response ) => {
-        return res.status(201).send({message: "Message has been successfully sent"})
+        return res.status(201).send({message: "Message has been successfully sent", response})
     })
     .catch((error) => {
       return res.status(400).send({error: error.errors[0].message})
